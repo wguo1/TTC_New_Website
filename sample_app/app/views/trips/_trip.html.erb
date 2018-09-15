@@ -1,0 +1,7 @@
+<li>
+  <%= link_to trip.title, trip %>
+  <% if current_user?(User.find(trip.user_id)) || current_user.admin > 7 || (current_user.admin > 1 && User.find(trip.user_id).admin < 2) %>
+    | <%= link_to "delete", trip, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

@@ -1,0 +1,18 @@
+<% if object.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(object.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% object.errors.full_messages.each do |msg| %>
+      <li><%= if msg == "Uid is the wrong length (should be 9 characters)"
+				"UID is the wrong length (should be 9 numbers)"
+			  elsif msg == "Uid is invalid"
+				"UID is invalid"
+			  else
+				msg
+			  end %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<tbody>
+	<tr>
+	<td><%= User.find(carpool.user_id).name %></td>
+	<% max = carpool.capacity %>
+	<% carpool.passengers.each do |passenger|%>
+		<td><%= User.find(passenger).name %></td>
+		<% max -= 1 %>
+	<%end%>
+	<% while max != 0 %>
+		<td><%= link_to("Add onto Carpool", carpool_path(carpool, :passengers => carpool.passengers.push(current_user.id), 
+						:option => current_user_id), :method => :patch, :confirm => "Sure?") %></td>
+		<% max -= 1 %>
+	<% end %>
+	</tr>
+</tbody>					
+
+

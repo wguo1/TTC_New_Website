@@ -1,0 +1,37 @@
+<% provide(:title, "Edit user") %>
+<h1>Edit your trip</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@trip) do |f| %>
+		<%= render 'shared/error_messages', object: @trip %>
+
+		<%= f.label :title %>
+		<%= f.text_field :title, class: 'form-control'%>
+  
+		<%= f.label :location, 'Location(s)' %>
+		<%= f.text_field :location, class: 'form-control'%>
+  
+	  <%= f.label :location, 'Dates' %>
+	  <div class="input-group input-group-sm mb-3 input-daterange">
+	  <%= f.text_field :startdate, class: "form-control", id: "flatpickr-input"%>
+
+	  <div class="input-group-addon">to</div>
+	  <%= f.text_field :enddate, class: "form-control", id: "flatpickr-input"%>
+	  </div>
+	  <br>
+	  
+	  <%= f.label :trip_leaders, "Trip Leader(s)" %>
+	  <%= f.text_field :trip_leaders, class: 'form-control'%>
+	  
+	  <%= f.label :max_capacity, "Max Capacity" %>
+	  <%= f.number_field :max_capacity, class: 'form-control'%>
+	  
+	  <%= f.label :content %>
+	  <%= f.text_area :content, class: 'field'%>
+	  
+	  <%= f.submit "Save Changes", class: "btn btn-primary" %>
+  
+	<% end %>
+  </div>
+</div>

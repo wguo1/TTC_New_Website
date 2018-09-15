@@ -1,0 +1,14 @@
+<% @trip.followers.each do |user| %>
+				<li><%= link_to user.name, user %>
+				<% relationship = Relationship.find_by(featured_trip_id: @trip.id, follower_id: user.id)%>
+				<% if relationship.accept %>
+					| <%= link_to("Take off of Trip", relationship_path(relationship, :accept => false), :method => :patch, :confirm => "Sure?") %>
+					
+					<% if user.car.present? && !@trip.carpools.find_by(user_id: user.id) %>
+						| <%= link_to "Add as Driver", carpools_path(:carpool => {:capacity => user.car.capacity, :trip_id => @trip.id, :user_id => user.id,}), method: :post %>
+					<% end %>
+				<% else %>
+					| <%= link_to("Add onto Trip", relationship_path(relationship, :accept => true), :method => :patch, :confirm => "Sure?") %>
+				<% end %>	
+				<%= Relationship.find_by(featured_trip_id: @trip.id, follower_id: user.id).created_at.strftime("%b %d %Y %l:%M%p")%></li>
+			<% end %>

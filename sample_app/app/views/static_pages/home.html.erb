@@ -1,0 +1,33 @@
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="trip_form">
+		<% if current_user.admin != 0 %>
+			<%= render 'trips/trip_form' %>
+		<% end %>
+      </section>
+    </aside>
+	<div class="col-md-8">
+	  <% if current_user.admin != 0 %>
+		<h3>Trip Feed</h3>
+		<%= render 'shared/feed' %>
+	  <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <h1>Welcome to the Sample App</h1>
+
+    <h2>
+      This is the home page for the ttc sample application.
+    </h2>
+
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  </div>
+
+  <%= link_to image_tag("logo.png", alt: "TTC logo"),
+              'http://terrapintrail.club' %>
+<% end %>

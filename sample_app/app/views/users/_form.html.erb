@@ -1,0 +1,41 @@
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: @user %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control' %>
+
+  <%= f.label :password_confirmation, "Confirmation" %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+  <%= f.label :UID, "UID" %>
+  <%= f.text_field :UID, class: 'form-control' %>
+  
+  <%= f.label :birthdate, "Birthday" %>
+  <%= f.text_field :birthdate, class: 'form-control', id: "flatpickr-birthday-input"%>
+  
+  <%= f.label :phone, "Phone Number" %>
+  <%= f.telephone_field :phone, class: 'form-control' %>
+  
+  <%= f.label :permanent_address, "Permanent Address (Please enter House #, Street Name, Apartment # if applicable, City, State, Zip Code, Country )" %>
+  <%= f.text_field :permanent_address, class: 'form-control' %>
+  
+  <%= f.label :current_address, "Current Address(On Campus Addresses only list hall name and room number)" %>
+  <%= f.text_field :current_address, class: 'form-control' %>
+  
+  <%= f.label :emergency_name, "Emergency Contact" %>
+  <%= f.text_field :emergency_name, class: 'form-control' %>
+	  
+  <%= f.label :emergency_phone, "Emergency Contact's Phone Number" %>
+  <%= f.telephone_field :emergency_phone, class: 'form-control' %>
+	  
+  <%= f.label :emergency_email, "Emergency Contact's Email" %>
+  <%= f.email_field :emergency_email, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

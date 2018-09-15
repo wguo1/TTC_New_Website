@@ -1,0 +1,9 @@
+<%= form_for(current_user.active_relationships.build) do |f| %>
+	<h1 style="text-align:center;"><b>Sign Up Here</b></h1>
+	
+	<%=f.label :comments %>
+	<%= f.text_area :comments, class: 'field', placeholder: "Additional Info..."%>
+	
+	<div><%= hidden_field_tag :featured_trip_id, @trip.id %></div>
+	<%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

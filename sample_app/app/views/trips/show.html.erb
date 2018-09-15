@@ -1,0 +1,51 @@
+<% provide(:title, @trip.title) %>
+<div class="row">
+	<% if @trip.user_id == current_user.id %>
+		<div class="col-md-4 trip_show">
+			<h1><%= @trip.title %></h1>
+			<h5>Led by <%= current_user.name%></h5>
+			<p><%= @trip.content %></p>
+			<br>
+			<%= link_to "Edit trip", edit_trip_path(@trip)%>
+			<% if @trip.active == true %>
+				<%= link_to("Close Trip", trip_path(@trip, :active => false), :method => :patch, :confirm => "Sure?") %>
+			<% else %>
+				<%= link_to("Open Trip", trip_path(@trip, :active => true), :method => :patch, :confirm => "Sure?") %>
+			<% end %>
+			
+		</div>
+		<aside class="col-md-8">
+			<ul class="users">
+			<%= render 'trip_followers' %>
+			</ul>
+		</aside>	
+	<% else %>		
+		<div class="col-md-8 trip_show">
+			<h1><%= @trip.title %></h1>
+			<h5>Led by <%= User.find(@trip.user_id).name%></h5>
+			<p><%= @trip.content %></p>
+		</div>	
+		<aside class="col-md-4">
+			<section class="trip_form">	
+				<% if @trip.followers.include?(current_user)%>
+					<%= render 'relationships/relationship_form_unfollow' %>
+					<% if @trip.carpools.any? %>
+						<table class="table">
+						<thead>
+						<tr>
+							<th scope="col">Driver</th>
+							<% (0..@trip.max_car_capacity - 1).each do %>
+								<th scope="col">Passenger</th>
+							<% end %>
+						</tr>
+						</thead>
+							<%= render @trip.carpools %>
+						</table>
+					<% end %>
+				<% else %>
+					<%= render 'relationships/relationship_form_follow' %>
+				<% end %>
+			</section>
+		</aside>
+	<% end %>
+</div>

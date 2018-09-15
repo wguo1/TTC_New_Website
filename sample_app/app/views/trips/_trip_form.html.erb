@@ -1,0 +1,30 @@
+<%= form_for(@trip) do |f| %>
+  <%= render 'shared/error_messages', object: @trip %>
+  <h1 style="text-align:center;"><b>Make a new trip</b></h1>
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control', placeholder: "Give it a unique name..."%>
+  
+  <%= f.label :location, 'Location(s)' %>
+  <%= f.text_field :location, class: 'form-control', placeholder: "Give it a unique name..."%>
+  
+  <%= f.label :startdate, 'Dates' %>
+  <div class="input-group input-group-sm mb-3 input-daterange">
+  <%= f.text_field :startdate, class: "form-control", id: "flatpickr-input", placeholder:"Start Date"%>
+
+  <div class="input-group-addon">to</div>
+  <%= f.text_field :enddate, class: "form-control", id: "flatpickr-input", placeholder:"End Date" %>
+  </div>
+  
+  <br>
+  
+  <%= f.label :trip_leaders, "Trip Leader(s)" %>
+  <%= f.text_field :trip_leaders, class: 'form-control', placeholder: "Who's leading it?"%>
+  
+  <%= f.label :max_capacity, "Max Capacity" %>
+  <%= f.number_field :max_capacity, class: 'form-control', placeholder: "How many people are you willing to lead?"%>
+  
+  <%= f.label :content %>
+  <%= f.text_area :content, class: 'field', placeholder: "Additional Info..."%>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+  
+<% end %>
